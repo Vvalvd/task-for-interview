@@ -5,17 +5,9 @@ import java.util.ArrayList;
 
 public class ClassFinder {
 
-    public static void main(String[] args) {
-        try {
-            System.out.println("Результат: " + findClasses("classes.txt", "SAO"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static ArrayList<String> findClasses(String filepath, String pattern) throws IOException {
+    public static ArrayList<String> findClasses(String filepath, String pattern) throws IOException {
         ArrayList<String> findResult = new ArrayList<>();
-        InputStream in = ClassFinder.class.getClassLoader().getResourceAsStream(filepath);
+        InputStream in = new FileInputStream(filepath);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String className, classNameForSearch;
         while ((className = br.readLine()) != null) {
@@ -47,8 +39,8 @@ public class ClassFinder {
                 findResult.add(className);
             }
         }
-
-        //todo добавить сортировку
+        FinderComparator finderComparator = new FinderComparator();
+        findResult.sort(finderComparator);
         return findResult;
     }
 }
