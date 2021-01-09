@@ -16,8 +16,6 @@ public class ClassFinder {
         ArrayList<String> findResult = new ArrayList<>();
         InputStream in = new FileInputStream(filepath);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        //className - переменная, содержащая в себе оригинальное наименование класса из файла (для итогового вывода)
-        //classNameForSearch - переменная для модификации наименования класса в процессе поиска
         String className, classNameForSearch;
         while ((className = br.readLine()) != null) {
             //если все символы шаблона в нижнем регистре, переводим символы наименования класса также в нижний регистр,
@@ -40,21 +38,16 @@ public class ClassFinder {
                     indexInPattern++;
                     continue;
                 }
-                //если символ в шаблоне и наименовании совпал - переходим к следующему символу шаблона
                 if (symbolOfWord == symbolOfPattern) {
                     indexInPattern++;
                 }
-                //если в шаблоне содержится ' ' - прекращаем поиск
                 if (symbolOfPattern == ' ') {
                     break;
                 }
 
-                //переходим к следующему символу в наименовании класса
                 indexInWord++;
             }
 
-            //если в ходе поиска были перебраны все символы шаблона - наименование включает в себя необходимый шаблон,
-            //включаем его в результат
             if (indexInPattern == pattern.length()) {
                 findResult.add(className);
             }
