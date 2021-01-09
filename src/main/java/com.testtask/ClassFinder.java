@@ -18,6 +18,9 @@ public class ClassFinder {
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String className, classNameForSearch;
         while ((className = br.readLine()) != null) {
+            if (className.isEmpty()) {
+                continue;
+            }
             //если все символы шаблона в нижнем регистре, переводим символы наименования класса также в нижний регистр,
             //чтобы поиск был регистронезависимым
             classNameForSearch = (pattern.equals(pattern.toLowerCase())) ? className.toLowerCase() : className;

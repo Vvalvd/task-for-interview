@@ -42,7 +42,7 @@ public class ClassFinderTest {
     }
 
     @Test(dataProvider = "test-class-finder")
-    public void checkCamelCaseLetters(String filepath, String pattern, ArrayList<String> findResult) throws IOException {
-        assertEquals(findResult, findClasses(filepath, pattern));
+    public void checkClassFinder(String filepath, String pattern, ArrayList<String> findResult) throws IOException {
+        assertEquals(findClasses(filepath, pattern), findResult);
     }
 }
