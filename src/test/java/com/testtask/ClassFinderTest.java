@@ -17,25 +17,25 @@ public class ClassFinderTest {
     Object[][] dataProviderTest() {
         String filepath = "./src/test/resources/classes.txt";
         return new Object[][]{
-                //символы в шаблоне в разном регистре (положительный сценарий)
+                //camel case in pattern (positive case)
                 {filepath, "FoBa", new ArrayList<>(Arrays.asList("c.d.FooBar", "a.b.FooBarBaz"))},
-                //символы в шаблоне в верхнем регистре в некорректном порядке
+                //upper case in pattern
                 {filepath, "BF", new ArrayList<>()},
-                //символы в шаблоне в нижнем регистре (регистронезависимый поиск)
+                //lower case in pattern (case insensitive)
                 {filepath, "fbb", new ArrayList<>(Collections.singletonList("a.b.FooBarBaz"))},
-                //символы в шаблоне в разном регистре (негативный сценарий)
+                //camel case in pattern (negative case)
                 {filepath, "fBb", new ArrayList<>()},
-                //шаблон оканчивается символом ' '
+                //pattern ends with ' '
                 {filepath, "FBar ", new ArrayList<>(Collections.singletonList("c.d.FooBar"))},
-                //шаблон подразумевает пропуск символов (*)
+                //pattern with wildcard character (*)
                 {filepath, "B*rBaz", new ArrayList<>(Collections.singletonList("a.b.FooBarBaz"))},
-                //проверка сортировки в результатирующем списке
+                //check of sort in result list
                 {"./src/test/resources/classesForSortCheck.txt", "FooBar",
                         new ArrayList<>(Arrays.asList("e.f.aFooBar", "c.d.bFooBar", "a.b.bFooBar", "a.b.zFooBarBaz"))}
         };
     }
 
-    //проверка случая, когда введен некорректный путь к файлу
+    //case with incorrect file path
     @Test(expectedExceptions = IOException.class)
     public void checkIncorrectFile() throws IOException {
         findClasses("test.txt", "FoBa");
